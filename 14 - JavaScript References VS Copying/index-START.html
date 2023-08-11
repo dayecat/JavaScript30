@@ -1,17 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>JS Reference VS Copy</title>
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
+
 <body>
 
   <script>
     // start with strings, numbers and booleans
+    // 成功複製a(數字)
+
+
+
+
+
 
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+
+    // let copy;
+    // copy = players;
+
+    // copy[0] = 'Mike'
+    // copy.push('lee')
+    // console.log(players);
+    // console.log('===========');
+    // console.log(copy);
+
+    // let filterArray = players.filter(() = true);
+    // filterArrayP[0] = 'mike'
+    // console.log(players);
+    // console.log('===========');
+    // console.log(copy);
+
+    let concatArray = [].concat(players);
+    concatArray[0] = 'mike'
+    console.log(players);
+    console.log('===========');
+    console.log(concatArray);
 
     // and we want to make a copy of it.
 
@@ -32,6 +61,13 @@
     // or create a new array and concat the old one in
 
     // or use the new ES6 Spread
+    // ...代表spread的寫法
+    let spreadArr = [...players];
+    spreadArr[0] = 'mike'
+    console.log(players);
+    console.log('===========');
+    console.log(spreadArr);
+
 
     // now when we update it, the original one isn't changed
 
@@ -42,7 +78,35 @@
       name: 'Wes Bos',
       age: 80
     };
+    // const newKey = {
+    //   id: 123456,
+    //   aggress:'台中市北區'
+    // }
+    // const combine = { ...person, ...newKey };
+    // console.log(combine);
+    // 使用spread 來複製
+    let spreadObj = { ...person };
+    spreadObj.name = 'mike';
+    console.log(person);
+    console.log(spreadObj);
 
+    // slice
+    let sliceArr = players.slice();
+    sliceArr[0] = 'mike';
+    // console.log(person);
+    // console.log('===================');
+    // console.log(sliceArr);
+    // slice(param1, param2)
+    // param1: 從第幾個元素開始取自己要的陣列
+    // param2: 取到第幾位
+    // 假設為負 EX: -2 的話 等於 陣列長度 (6) + (-2) = 4
+    //                 (-2, (陣列長度) )
+    // let slice = arr.slice(-2, 6);
+    // param1 若不填寫,則以0代替；若大於陣列長度,會得到空陣列
+    // param2 若不填寫 則以陣列長度替代
+    let arr = [1, 2, 3, 4, 5, 6];
+    let slice = arr.slice(2, 5);
+    console.log(slice);
     // and think we make a copy:
 
     // how do we take a copy instead?
@@ -50,8 +114,46 @@
     // We will hopefully soon see the object ...spread
 
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    const obj = {
+      name: 'mike',
+      address: '台中市',
+      props: [[
+        '筆電', '桌電'
+      ], [
+        '電風扇', '風扇'
+      ],]
+    }; 
+    // const obj = {
+    //   name: 'mike',
+    //   address: '台中市',
+    //   props: [
+    //     '筆電', '桌電'
+    //   ],
+    // };
+    // 淺複製
+    // const cp = { ...obj };
+    //淺層的不受影響
+    // copy.name = 'lee';
+    // 深層的會影響
+    // copy.props[0] = '壞掉的筆電';
+    // console.log(obj);
+    // console.log(cp);
 
+    // 淺複製
+    let assign = Object.assign({}, obj);
+    assign.name = 'lee';
+    assign.props[0] = '壞掉的筆電';
+    console.log(assign);
+    console.log(obj);
+    const objjson = JSON.stringify(obj);
+    const convert = JSON.parse(objjson);
+    convert.name = 'lee';
+    convert.props[0][0] = '壞掉的筆電';
+    convert.props[1][0] = '壞掉的風扇';
+    console.log(obj);
+    console.log(convert);
   </script>
 
 </body>
+
 </html>

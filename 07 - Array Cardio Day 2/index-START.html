@@ -26,16 +26,47 @@
     ];
 
     // Some and Every Checks
+    //確認資料集之中-是否有一筆資料滿足條件
     // Array.prototype.some() // is at least one person 19 or older?
+    // Data():是一個內建的日期和時間物件，用於處理日期和時間相關的操作。
+    //getFullYear():用於獲取 Date 物件中的年份部分，並且僅在處理日期和時間。
+    //some():JavaScript 陣列的一個內建方法，用於測試陣列中是否至少有一個元素滿足特定的條件，如果是，則返回 true，否則返回 false。
+    //some(item); item用來賦予some()名子
+    // let year = new Date().getFullYear(); 獲取目前時間的年份。
+    let year = new Date().getFullYear();
+    const isAudlt = people.some((item) => ((year - item.year) >= 19));
+    if (isAudlt) {
+      //至少一員滿19歲
+      //.....
+    }
+    console.log(isAudlt);
+    // every() 每一個
+    // 確認資料集中是否全部都符合條件
     // Array.prototype.every() // is everyone 19 or older?
-
+    const isEveryoneAudlt = people.every((item) => ((year - item.year) >= 19));
+    if (isEveryoneAudlt) {
+      //全員滿19歲
+      //.....
+    }
+    console.log(isEveryoneAudlt);
     // Array.prototype.find()
+    // 尋找第一筆滿足條件的元素，找到後回傳該元素。
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
-
+    const findObj = comments.find((item) => item.id === 823423);
+    console.log(findObj);
+    
     // Array.prototype.findIndex()
     // Find the comment with this ID
     // delete the comment with the ID of 823423
+    // 尋找第一筆滿足條件的元素 找到後回傳該元素索引值(index)
+    const indexObj = comments.findIndex((item) => item.id === 823423);
+    // 刪除或增加元素的功能
+    // 第一個參數 => 從哪個索引值開始
+    // 第二個參數 => 刪除幾個元素
+    // 從上面找到的索引值indexObj開始 刪除一個元素
+    comments.splice(indexObj, 1);
+    console.log(comments);
 
   </script>
 </body>

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Array Cardio 💪</title>
   <link rel="icon" href="https://fav.farm/✅" />
 </head>
+
 <body>
   <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
   <script>
@@ -35,20 +37,84 @@
       'Berne, Eric', 'Berra, Yogi', 'Berry, Wendell', 'Bevan, Aneurin', 'Ben-Gurion, David', 'Bevel, Ken', 'Biden, Joseph', 'Bennington, Chester', 'Bierce, Ambrose',
       'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
     ];
-
+    // 過濾器
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-    const fifteen = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year < 1600));
+    const filteredData = inventors.filter(function (inventor) {
+      if (inventors.year >= 1500 && inventors.year < 1600) {
+        return true;
+      }
+    });
+    const namel = inventors.filter(function (inventor) {
+      if (inventor.first.includes("l") || inventor.first.includes('L')) {
+        return true;
+      } else {
+        return false;
+      }
+    });
 
-    console.table(fifteen);
+    console.table(namel);
+    // 小練習
+    // 找出first name 中 含有L 的資料
+    const paracticeFilter = inventors.filter((inventor) => {
+      if (inventor.first.includes('l') || inventor.first.includes('L')) {
+        return true;
+      }
+    });
+    // console.log(paracticeFilter);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventor first and last names
-    const fullNames = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
-    console.log(fullNames);
+    const mapArray = inventors.map((inventor) => {
+      return `${inventor.first} ${inventor.last} age; ${inventor.year}`;
 
+    });
+    console.log(mapArray);
+
+
+    const mapArra = inventors.map((inventor) => {
+      const passed = new Date().getFullYear(); // 取得現在的年份
+      const age = passed - inventor.year; // 計算年齡
+      return `${inventor.first} ${inventor.last} age:${age}`;
+    });
+    console.log(mapArra);
+    const currentYear = 2023; // 設定目前年份為2023
+
+    const mapArray3 = inventors.map((inventor) => {
+      const age = currentYear - inventor.year; // 計算年齡
+      return `${inventor.first} ${inventor.last} age:${age}`;
+    });
+
+    console.log(mapArray3);
+
+
+    const mapArra4 = inventors.map((inventors) => {
+      const obj = {
+        first: inventors.first,
+        last: inventors.last,
+        year: inventors.year,
+        passed: inventors.passed,
+        age: inventors.passed - inventors.year,
+      };
+      return obj;
+    });
+    console.log(mapArra4);
+    const mapArra5 = inventors.map((inventors) => {
+      inventors['age'] = inventors.passed - inventors.year;
+      return inventors;
+    });
+
+    console.log(mapArra4);
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+
+    //sort(function(第一個值, 第二個值))
+    const sortArray = inventors.sort((first, second) => {
+      // return (first.year - second.year);
+        return (second.year - first.year);
+    });
+    console.table(sortArray);
+
     // const ordered = inventors.sort(function(a, b) {
     //   if(a.year > b.year) {
     //     return 1;
@@ -56,7 +122,7 @@
     //     return -1;
     //   }
     // });
-
+    //  sort = 排序
     const ordered = inventors.sort((a, b) => a.year > b.year ? 1 : -1);
     console.table(ordered);
 
@@ -69,7 +135,7 @@
     console.log(totalYears);
 
     // 5. Sort the inventors by years lived
-    const oldest = inventors.sort(function(a, b) {
+    const oldest = inventors.sort(function (a, b) {
       const lastInventor = a.passed - a.year;
       const nextInventor = b.passed - b.year;
       return lastInventor > nextInventor ? -1 : 1;
@@ -87,18 +153,31 @@
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-    const alpha = people.sort((lastOne, nextOne) => {
-      const [aLast, aFirst] = lastOne.split(', ');
-      const [bLast, bFirst] = nextOne.split(', ');
-      return aLast > bLast ? 1 : -1;
+    // const alpha = people.sort((lastOne, nextOne) => {
+    //   const [aLast, aFirst] = lastOne.split(', ');
+    //   const [bLast, bFirst] = nextOne.split(', ');
+    //   return aLast > bLast ? 1 : -1;
+    // });
+    // console.log(alpha);
+    const alphabetically = people.sort((a, b) => {
+      // console.log(a, b);
+      const aLast = a.split(', ')[1];
+      const bLast = b.split(', ')[1];
+      // const [aFirst, aLast] = a.split(',');
+      // const [bFirst, bLast] = b.split(',');
+      console.log(aLast, bLast);
+      // if (aLast > bLast) {
+      //   return 1;
+      // } else {
+      //   return -1;
+      // } 
     });
-    console.log(alpha);
-
+    console.log(alphabetically);
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck', 'pogostick'];
 
-    const transportation = data.reduce(function(obj, item) {
+    const transportation = data.reduce(function (obj, item) {
       if (!obj[item]) {
         obj[item] = 0;
       }
@@ -110,4 +189,5 @@
 
   </script>
 </body>
+
 </html>

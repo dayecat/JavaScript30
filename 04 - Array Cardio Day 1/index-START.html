@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Array Cardio 💪</title>
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
+
 <body>
   <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
   <script>
@@ -35,7 +37,7 @@
       'Berne, Eric', 'Berra, Yogi', 'Berry, Wendell', 'Bevan, Aneurin', 'Ben-Gurion, David', 'Bevel, Ken', 'Biden, Joseph', 'Bennington, Chester', 'Bierce, Ambrose',
       'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
     ];
-    
+
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
 
@@ -48,19 +50,73 @@
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
 
-    // 5. Sort the inventors by years lived
+    // (a, b)  a: 現在累積的值 b: 現在輪到的值
+    const sum = [0, 1, 2, 3].reduce((acc, cur) => {
+      console.log(acc, cur);
+      return acc + cur;
+    }, 0);
+    const years = inventors.reduce((acc, cur) => {
+      return acc + (cur.passed - cur.year)
+    }, 0);
+    console.log(years);
 
+
+    // const obj = inventors.reduce((acc, cur) => {
+    //   let age = inventors.reduce((acc, cur) => {
+    //     let age = acc.toralAge + (cur.passed - cur.year);
+    //     let car = acc.totalCar + cur.car;
+    //   })
+    // };
+    //   return {
+    //   totalAge = age,
+    //   totalCar = car,
+    //   toralAge: 0,
+    //   totalCar: 0,
+    // });
+    // console.log(obj);
+
+    // 5. Sort the inventors by years lived
+    const liveSort = mapArray.sort((a, b) => {
+      let aYear = a.passed - a.year;
+      let bYear = b.passed - b.year;
+      if (aYear < bYear) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+    console.log(liveSort);
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
-
+    // const container = document.querySelector('.mw-category');
+    // const aHerfs = Array.from(container.querySelectorAll('a'));
+    // const newArray = aHerfs.filter((htmlElements) => {
+    //   return htmlElement.includes('de');
+    // });
+    const aHerfs = Array.from(document.querySelectorAll('.mw-body a'));
+    const filter = aHerfs.filter((aHerf) => {
+      return aHerf.textContent.includes('de');
+    });
+    console.log(aHerf);
     // 7. sort Exercise
     // Sort the people alphabetically by last name
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
-    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck'];
+    const sumData = data.reduce((acc, cur) => {
+      console.log(acc[cur]);
+      //假設acc[cur]為undefined,尚未有這個屬性
+      if(!acc[cur]) {
+        acc[cur] = 1;
+      } else {
+        // 若屬性存在, 就在該屬性+1
+        acc[cur] = acc[cur] + 1;
+      }
+      return acc;
+    }, {});
+    console.log(sumData);
   </script>
 </body>
+
 </html>
